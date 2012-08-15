@@ -10,20 +10,22 @@ from xlrd import cellname, cellnameabs, colname
 import readline
 
 #writing functions
-def iterwrite(x, y, new_x, new_y, worksheet, data):
-	for y_index in range(y, rs.ncols):
-		for x_index in range(x, rs.nrows):
-			worksheet.write(new_x, new_y, data)
-			new_x += 1
-		new_x = 0
-		new_y += 1
+def iterwrite(x, y, new_x, new_y, worksheet, modulator):
+    for y_index in range(y, rs.ncols):
+        for x_index in range(x, rs.nrows):
+            cell_value = rs.cell(x_index, y_index).value
+            print cell_value
+            
+            new_x += 1
+        new_x = 0
+    new_y += 1
 
 #opens database file
 f = open('sp2_metadata_biodb.txt', 'rb')
 annofile = csv.reader(f, delimiter="\t")
 anno = list()
 for items in annofile:
-	anno.append(items)
+    anno.append(items)
 
 #excel styles
 h_style = easyxf('font: underline single, color blue;')
@@ -50,7 +52,7 @@ wm = Writebook.get_sheet(1)
 wn = Writebook.get_sheet(2)
 
 #Duplicate original sheet
-iterwrite(0,0,0,0, wo, rs.cell(%d,%d).value) % x_index, y_index
+iterwrite(0,0,0,0, wo, 
 
 savefile = os.path.splitext(inputfile)[0] + u'.out' + os.path.splitext(inputfile)[-1]
 print 'Job is done. Your file is located here:' + savefile

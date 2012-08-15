@@ -15,8 +15,13 @@ annofile = csv.reader(f, delimiter="\t")
 
 h_style = easyxf('font: underline single, color blue;')
 t_style = easyxf('align: horiz center; font: bold 1, color black; pattern: pattern solid, fore_color yellow;')
+t2_style = easyxf('align: horiz center; font: bold 1, color black; pattern: pattern solid, fore_color yellow; borders: bottom medium;')
 error_style = easyxf('font: bold 1, color red;')
 decimal_style = easyxf("", "#,###.000")
+sc_style = easyxf('pattern: pattern solid, fore_color sea_green;')
+sc0_style = easyxf('font: color 22;')
+title_style =  easyxf('align: horiz right;')
+
 
 #protein list input from file
 inputfile = raw_input("Type in the full path for sample report file:")
@@ -37,11 +42,11 @@ col = 0
 newrow = 0
 newcol = 0
 for col_index in range(col, rs.ncols):
-	for row_index in range(row, rs.nrows):
-		wo.write(newrow, newcol, rs.cell(row_index, col_index).value)
-		newrow += 1
-	newrow = 0
-	newcol += 1
+    for row_index in range(row, rs.nrows):
+        wo.write(newrow, newcol, rs.cell(row_index, col_index).value)
+        newrow += 1
+    newrow = 0
+    newcol += 1
 
 proteinlist = list()
 
@@ -63,6 +68,8 @@ wn.write(newrow, 3, rs.cell(row, 5).value, t_style)
 for col_index in range(0, 26):
 	ws.write(1, col_index, "", t_style)
 	wn.write(1, col_index, "", t_style)
+    ws.write(2, col_index, "", t2_style)
+    wn.write(2, col_index, "", t2_style)
 
 #title of columns
 def titles():
